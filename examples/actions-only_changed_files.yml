@@ -19,7 +19,7 @@ jobs:
         run: >
           echo "CHANGED_FILES=$(echo $(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- | grep \.py))" >> $GITHUB_ENV
       - if: ${{ env.CHANGED_FILES }}
-        uses: marian-code/python-lint-annotate@v3
+        uses: marian-code/python-lint-annotate@v4
         with:
           python-root-list: ${{ env.CHANGED_FILES }}
           extra-pylint-options: "--disable=C0114,C0116"  # Missing doctrings
