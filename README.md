@@ -32,7 +32,7 @@ Basic:
 
 ```yml
 steps:
-  - uses: actions/checkout@v4
+  - uses: actions/checkout@v6
   - uses: marian-code/python-lint-annotate@v4
 ```
 
@@ -40,7 +40,7 @@ Options:
 
 ```yml
 steps:
-  - uses: actions/checkout@v4
+  - uses: actions/checkout@v6
   - uses: marian-code/python-lint-annotate@v4
     with:
       python-root-list: "src/ tests/*"  # accepts wildcards
@@ -48,7 +48,7 @@ steps:
       use-mypy: false
       use-vulture: true
       extra-pylint-options: "--output-format="colorized"
-      python-version: "3.8"
+      python-version: "3.10"
 ```
 
 ### Examples
@@ -56,17 +56,17 @@ steps:
 
 ## Details
 
-Uses `actions/setup-python@v5`. Only python `3.8` - `3.12` versions are tested.
-Python `3.x` versions prior to `3.8` are not tested since they are EOL now.
+Uses `actions/setup-python@v6`. Only python `3.10` - `3.14` versions are tested.
+Python `3.x` versions prior to `3.10` are not tested since they are EOL now.
 Any python `2.x` versions are unsupported! You can lint on Linux, Windows and MacOS.
 
 The linter versions are defined in [requirements.txt](requirements.txt).
 
 ## IMPORTANT - test environment
 
-The python version is set by `actions/setup-python@v5` using composite actions. This
+The python version is set by `actions/setup-python@v6` using composite actions. This
 means that the the action will change python you might have previously set with
-`actions/setup-python@v5`. There are two ways to circumvent this.
+`actions/setup-python@v6`. There are two ways to circumvent this.
 
 - Keep the lintnig action separated from others
 - Use it at the and of your workflow when the change in python version will not
@@ -84,12 +84,12 @@ jobs:
     name: Lint Python
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
+    - uses: actions/checkout@v6
+    - uses: actions/setup-python@v6
       with:
-        python-version: 3.9
+        python-version: 3.10
     - run: |
-        python --version  # this will output 3.9 now
+        python --version  # this will output 3.10 now
         run tests or other things using python ...
     - uses: marian-code/python-lint-annotate@v4
       with:
@@ -103,9 +103,9 @@ jobs:
         use-pylint: false
         use-flake8: false
         use-vulture: true
-        python-version: "3.8"
+        python-version: "3.10"
     - run: |
-        python --version  # this will output 3.8 now !!!
+        python --version  # this will output 3.10 now !!!
 ```
 
 ## License
